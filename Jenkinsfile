@@ -8,12 +8,12 @@ node {
 
 	stage ('Build image')
 	{
-		app =docker.build('voa2000/jenkins-examples')
+		app = docker.build('voa2000/jenkins-examples')
 	}
 
 	stage('Push image')
 	{
-		docker.withRegistry('https://registory.hub.docker.com', 'docker-user')
+		docker.withRegistry('https://registory.hub.docker.com', 'DOCKER-HUB-CREDENTIALS')
 		{
 			app.push('latest')
 		}	
