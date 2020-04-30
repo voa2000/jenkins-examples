@@ -1,29 +1,17 @@
-pipeline {
-      environment {
-        registry = "voa2000/jenkins-image"
-        registryCredential = 'DOCKER-HUB-CREDENTIALS'
-        app = ''
-      }
+node {
+    def app
 
-agent any
-    stages {
-
-        stage ('Clone repository')
-        {
+        stage ('Clone repository') {
             checkout scm
         }
 
-        stage ('Build image')
-        {
+        stage ('Build image') {
             app = docker.build('voa2000/jenkins-examples')
         }
-
-        stage('Push image')
-        {
-            docker.withRegistry('https://registory.hub.docker.com', 'DOCKER-HUB-CREDENTIALS')
-            {
+        stage('Push image') {
+            docker.withRegistry('https://registory.hub.docker.com', 'DOCKER-HUB-CREDENTIALS') {
                 app.push('latest')
             }
         }
-     }
+
 }
