@@ -1,29 +1,35 @@
 pipeline {
     environment {
-        registry = "voa2000/jenkins-image""
+        registry = "voa2000/jenkins-image"
         registryCredential = 'DOCKER-HUB-CREDENTIALS'
+        dockerImage = ''
     }
 
     agent any
 
     stages{
 
-        stage ('Clone repository')
+        stage ('Cloning repository')
                 {
                     checkout scm
                 }
 
         stage ('Build image')
                 {
-                    docker.build registry + "latest"
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
 
         stage('Push image')
                 {
-                    docker.withRegistry('https://registory.hub.docker.com', 'DOCKER-HUB-CREDENTIALS')
+                    docker.withRegistry('', 'DOCKER-HUB-CREDENTIALS')
                             {
-                                push('latest')
+                                dockerImage.push()
                             }
                 }
+         stage('Remove Unused docker image') {
+                   steps{
+                     sh "docker rmi $registry:$BUILD_NUMBER"
+                   }
+                 }
 
     }}
