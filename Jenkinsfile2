@@ -1,4 +1,5 @@
-pipeline {
+pipeline
+    {
     environment {
         registry = "voa2000/jenkins-image"
         registryCredential = 'DOCKER-HUB-CREDENTIALS'
@@ -7,7 +8,8 @@ pipeline {
 
     agent any
 
-    stages{
+    stages
+    {
 
         stage ('Cloning repository')
                 {
@@ -32,4 +34,5 @@ pipeline {
                    }
                  }
 
-    }}
+        }
+    }
