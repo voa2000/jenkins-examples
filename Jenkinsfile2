@@ -5,10 +5,7 @@ pipeline
         registryCredential = 'DOCKER-HUB-CREDENTIALS'
         dockerImage = ''
     }
-
     agent any
-
-    stages
     {
 
         stage ('Cloning repository')
@@ -24,15 +21,12 @@ pipeline
         stage('Push image')
                 {
                     docker.withRegistry('', 'DOCKER-HUB-CREDENTIALS')
-                            {
-                                dockerImage.push()
-                            }
+                    dockerImage.push()
                 }
-         stage('Remove Unused docker image') {
-                   steps{
+         stage('Remove Unused docker image')
+                {
                      sh "docker rmi $registry:$BUILD_NUMBER"
-                   }
-                 }
+                }
 
         }
     }
