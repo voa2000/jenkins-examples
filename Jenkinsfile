@@ -8,7 +8,7 @@ node {
 
 	stage ('Build image')
 	{
-		app =docker.build('voa2000/jenkins-examples')
+		app = docker.build('voa2000/jenkins-examples')
 	}
 
 	stage('Push image')
