@@ -1,4 +1,4 @@
-# jenkins-example
+# Jenkins Example
 
 This is a simple project using Jenkins to build and push a docker images.
 
