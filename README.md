@@ -7,5 +7,5 @@ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --name jenkins \
 
-getintodevops/jenkins-withdocker:lts
-https://tutorials.releaseworksacademy.com/learn/the-simple-way-to-run-docker-in-docker-for-ci
+1. getintodevops/jenkins-withdocker:lts
+2. https://tutorials.releaseworksacademy.com/learn/the-simple-way-to-run-docker-in-docker-for-ci
